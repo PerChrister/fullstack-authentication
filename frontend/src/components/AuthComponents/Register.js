@@ -1,17 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import RegisterForm from '../FormComponents/RegisterForm';
 
 const Register = () => {
-
-    const handleRegisterClicked = () => {
-        console.log("Triggered from RegisterForm")
-    }
 
     return (
         <div>
             <h1>Register</h1>
 
-            <RegisterForm click={handleRegisterClicked} />
+            <RegisterForm />
+
+            <Link to="/login">Already have an account? Login here.</Link>
         </div>
     )
 }

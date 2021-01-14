@@ -1,42 +1,55 @@
-import React, { useState } from 'react';
+import React from 'react';
+import Form from 'react-bootstrap/Form'
+import { Link } from 'react-router-dom';
+import firebase from '../utils/FirebaseUtils/firebase';
 
-const RegisterForm = (props) => {
+const RegisterForm = ({ history }) => {
 
-    //props -> parent to child
-    //those who have the props is the child
-
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-
-    const onRegisterClicked = (ev) => {
-        console.log("EVENT: ", ev.target);
-        props.click();
-        console.log(username)
-        console.log(password)
-    }
-
-    const onUsernameChanged = ev => {
-        setUsername(ev.target.value.trim())
-    }
-
-    const onPasswordChanged = ev => {
-        setPassword(ev.target.value.trim())
+    const handleRegister = async event => {
+        event.preventDefault();
+        let { username, email, password, firstname, lastname } = event.target.elements;
+        firebase.auth().createUserWithEmailAndPassword(email.value, password.value)
+            .then(userData => {
+                history.push("/login")
+            })
+            .catch(err => {
+                alert(err.message);
+            });
     }
 
     return (
-        <form>
-            <div>
-                <label>Username</label>
-                <input type="text" placeholder="Enter your username" onChange={onUsernameChanged} />
-            </div>
-            <div>
-                <label>Password</label>
-                <input type="password" placeholder="Enter your password" onChange={onPasswordChanged} />
-            </div>
-            <div>
-                <button type="button" onClick={onRegisterClicked}>Register</button>
-            </div>
-        </form>
+        <Form onSubmit={handleRegister}>
+            <Form.Group controlId="formFirstName">
+                <Form.Label>First Name: </Form.Label>
+                <Form.Control name="firstname" type="text" placeholder="First Name" required />
+            </Form.Group>
+
+            <Form.Group controlId="formLastName">
+                <Form.Label>Last Name: </Form.Label>
+                <Form.Control name="lastname" type="text" placeholder="Last Name" required />
+            </Form.Group>
+
+            <Form.Group controlId="formUserName">
+                <Form.Label>User Name: </Form.Label>
+                <Form.Control name="username" type="text" placeholder="Username" required />
+            </Form.Group>
+
+            <Form.Group controlId="formPassword">
+                <Form.Label>Password: </Form.Label>
+                <Form.Control name="password" type="password" placeholder="Password" required />
+            </Form.Group>
+
+            <Form.Group controlId="formEmail">
+                <Form.Label>Email: </Form.Label>
+                <Form.Control name="email" type="email" placeholder="Email" required />
+            </Form.Group>
+
+            <button type="submit">Register</button>
+            <Link to="/login">
+                <button>Cancel</button>
+            </Link>
+        </Form>
+
     )
 }
 

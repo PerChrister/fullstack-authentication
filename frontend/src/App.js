@@ -10,6 +10,8 @@ import Home from './components/HomeComponents/Home';
 import Dashboard from './components/HomeComponents/Dashboard';
 import NotFound from './components/StylingComponents/NotFound';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 function App() {
   return (
     <React.Fragment>
