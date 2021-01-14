@@ -1,5 +1,5 @@
 import React from 'react';
-import LoginPhoneForm from '../forms/LoginPhoneForm';
+import LoginPhoneForm from '../FormComponents/LoginPhoneForm';
 
 const LoginPhone = () => {
 
