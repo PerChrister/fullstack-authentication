@@ -1,4 +1,5 @@
 import React from 'react'
+import Dashboard from './components/HomeComponents/Dashboard'
 import './App.css';
 
 function App() {
@@ -6,6 +7,7 @@ function App() {
     <React.Fragment>
       <div className="App">
         My React App
+        <Dashboard />
       </div>
     </React.Fragment>
   );
